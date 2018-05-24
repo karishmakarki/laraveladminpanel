@@ -21,7 +21,7 @@
 
      <section class="content">
       <div class="container-fluid">
-       	<form method="post" action="{{ route('admin.news.store') }}" enctype="multipart/form/data">
+       	<form method="post" action="{{ route('admin.news.store') }}" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">    
              <div class="form-group">
                 <div class="row">
@@ -59,15 +59,14 @@
                 </div>
               </div>
 
-            <!--   <div class="form-group">
-              <div class="row">
-                 <label class="col-md-3">Slug</label>  
-                   <div class="col-md-7">
-                      <input type="text" name="slug" class="form-control"></div>
-                    <div class="clearfix"></div>
-              </div>
-            </div> -->
-
+          <div class="form-group">
+            <div class="row">
+               <label class="col-md-3">Slug</label>  
+                 <div class="col-md-7">
+                    <input type="text" name="slug" class="form-control"></div>
+                  <div class="clearfix"></div>
+            </div>
+          </div>
                   <div class="form-group">
             		   <input type="submit" value="Save" class="btn btn-primary">
                   </div>

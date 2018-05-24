@@ -44,7 +44,7 @@ class NewsController extends Controller
     public function store(Request $request,News $news)
     {
         
-        /*if($request->image->getClientOriginalName()){
+        if($request->image->getClientOriginalName()){
             $ext = $request->image->getClientOriginalExtension();
             $file = date ('YmdHis').rand(1,99999).'.'.$ext;
             $request->image->storeAs('public/news',$file);
@@ -53,7 +53,9 @@ class NewsController extends Controller
         {
             $file = '';
         }
-        $news->images = $file;*/
+
+        $news->image = $file;
+
         $news->title = $request->title;
         $news->author = $request->author;
         $news->description = $request->description;
@@ -91,17 +93,33 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, News $news)
     {
+
+     if(isset($request->image) && $request->image->getClientOriginalName())
+     {
+            $ext = $request->image->getClientOriginalExtension();
+            $file = date ('YmdHis').rand(1,99999).'.'.$ext;
+            $request->image->storeAs('public/news',$file);
+        }
+        else
+        {
+            $file = '';
+        }
+
+        $news->image = $file;
+
         $news->title = $request->title;
         $news->author = $request->author;
         $news->description = $request->description;
-        $news->slug = $request->slug;
         $news->save();
-        return redirect()->route('admin.news.index'); 
-        
-    }
+        return redirect()->route('admin.news.index');
 
+        $news->title = $request->title;
+        $news->save();
+        return redirect()->route('admin.categories.index');
+    }
     /**
      * Remove the specified resource from storage.
      *

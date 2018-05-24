@@ -21,7 +21,7 @@
 
      <section class="content">
       <div class="container-fluid">
-        <form method="post" action="{{ route('admin.news.update',$news->id) }}">
+        <form method="post" action="{{ route('admin.news.update',$news->id) }}" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">   
            @method('PUT') 
              <div class="form-group">
@@ -45,18 +45,23 @@
             <div class="form-group">
                 <div class="row">
                    <label class="col-md-3">Image</label>  
-                     <div class="col-md-7">
-                        <input type="file" name="image" class="form-control" value="{{ $news->image }}"></div>
-                      <div class="clearfix"></div>
+                     <div class="col-md-9"><input type="file" name="image"></div>
+                     
+                   <div class="clearfix"></div>
+                   <div class="col-md-3"></div>
+                   <div class="col-md-9">
+                 <img src="{{ asset('storage/news/'.$news->image) }}" style="width: :150px; height: 100px;">
+                 </div>
+                    
                 </div>
               </div>
-
 
               <div class="form-group">
                 <div class="row">
                    <label class="col-md-3">Description</label>  
                      <div class="col-md-7">
-                        <textarea name="description" class="form-control" value="{{ $news->description }}"></textarea></div>
+                        <textarea name="description" class="form-control">{{ $news->description }}</textarea>
+                      </div>
                       <div class="clearfix"></div>
                 </div>
               </div>
